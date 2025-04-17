@@ -1,9 +1,7 @@
 package com.example.bachelorprojectjava.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.bachelorprojectjava.enums.RoleType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +23,16 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    public boolean isTeacher() {
+        return role.getRoleType() == RoleType.TEACHER;
+    }
+
+    public boolean isStudent() {
+        return role.getRoleType() == RoleType.STUDENT;
+    }
 }
