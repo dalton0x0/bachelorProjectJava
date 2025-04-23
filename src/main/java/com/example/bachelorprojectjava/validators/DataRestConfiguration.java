@@ -12,6 +12,8 @@ public class DataRestConfiguration implements RepositoryRestConfigurer {
     private UserValidator userValidator;
     @Autowired
     private RoleValidator roleValidator;
+    @Autowired
+    private ClassroomValidator classroomValidator;
 
     @Override
     public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener v) {
@@ -20,5 +22,8 @@ public class DataRestConfiguration implements RepositoryRestConfigurer {
 
         v.addValidator("beforeCreate", roleValidator);
         v.addValidator("beforeSave", roleValidator);
+
+        v.addValidator("beforeCreate", classroomValidator);
+        v.addValidator("beforeSave", classroomValidator);
     }
 }
