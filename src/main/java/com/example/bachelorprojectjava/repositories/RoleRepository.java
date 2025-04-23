@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoleRepository extends JpaRepository<Role, Long> {
     boolean existsByRoleType(RoleType roleType);
+
+    Role findByRoleType(RoleType roleType);
+    Role findByLabelContaining(String label);
 }
