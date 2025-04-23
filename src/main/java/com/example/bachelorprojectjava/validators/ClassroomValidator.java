@@ -1,7 +1,6 @@
 package com.example.bachelorprojectjava.validators;
 
 import com.example.bachelorprojectjava.models.Classroom;
-import com.example.bachelorprojectjava.models.Role;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

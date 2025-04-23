@@ -1,10 +1,6 @@
 package com.example.bachelorprojectjava.handlers;
 
 import com.example.bachelorprojectjava.models.Evaluation;
-import com.example.bachelorprojectjava.models.Role;
-import com.example.bachelorprojectjava.models.User;
-import com.example.bachelorprojectjava.repositories.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate;
 import org.springframework.data.rest.core.annotation.HandleBeforeSave;
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler;
