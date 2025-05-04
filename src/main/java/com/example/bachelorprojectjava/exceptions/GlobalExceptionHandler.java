@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<HttpStatus> handleResourceNotFoundException(ResourceNotFoundException e) {
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<String> handleResourceNotFoundException(ResourceNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("'error': " + e.getMessage());
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<HttpStatus> handleBadRequestException(BadRequestException e) {
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> handleBadRequestException(BadRequestException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("'error': " + e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<HttpStatus> handleException(Exception e) {
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("'error': " + e.getMessage());
     }
 }
