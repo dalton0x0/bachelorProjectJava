@@ -43,6 +43,10 @@ public class User {
     @JsonIgnore
     private List<Classroom> taughtClassrooms = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<Note> notes = new ArrayList<>();
+
     public boolean isTeacher() {
         return role.getRoleType() == RoleType.TEACHER;
     }
