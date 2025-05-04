@@ -24,10 +24,23 @@ public class UserHandler {
 
     @HandleBeforeSave
     public void handleUserBeforeSave(User user) {
-        String oldUserEmail = userRepository.findById(user.getId()).get().getEmail();
-        String oldUsername = userRepository.findById(user.getId()).get().getUsername();
-        if (!oldUserEmail.equals(user.getEmail()) || !oldUsername.equals(user.getUsername())) {
-            checkUniqueConstraints(user);
+        User existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new BadRequestException("User not found"));
+
+        if (!existingUser.getEmail().equals(user.getEmail())) {
+            if (userRepository.existsByEmail(user.getEmail())) {
+                throw new BadRequestException("This email address already exists");
+            } else {
+                existingUser.setEmail(user.getEmail());
+            }
+        }
+
+        if (!existingUser.getUsername().equals(user.getUsername())) {
+            if (userRepository.existsByUsername(user.getUsername())) {
+                throw new BadRequestException("Username already exists");
+            } else {
+                existingUser.setUsername(user.getUsername());
+            }
         }
         user.setEnabled(true);
     }
