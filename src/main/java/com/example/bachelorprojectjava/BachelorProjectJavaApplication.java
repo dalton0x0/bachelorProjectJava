@@ -1,13 +1,8 @@
 package com.example.bachelorprojectjava;
 
-import com.example.bachelorprojectjava.enums.RoleType;
-import com.example.bachelorprojectjava.models.Role;
-import com.example.bachelorprojectjava.repositories.RoleRepository;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BachelorProjectJavaApplication {

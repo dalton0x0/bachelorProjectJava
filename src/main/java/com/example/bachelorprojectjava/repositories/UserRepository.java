@@ -1,5 +1,6 @@
 package com.example.bachelorprojectjava.repositories;
 
+import com.example.bachelorprojectjava.enums.RoleType;
 import com.example.bachelorprojectjava.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,4 +11,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
 
     List<User> findByFirstNameContainingOrLastNameContaining(String firstName, String lastName);
+    User findByRole_RoleType(RoleType roleRoleType);
+    List<User> findByEnabled(boolean enabled);
 }

@@ -20,7 +20,6 @@ public class DataRestConfiguration implements RepositoryRestConfigurer {
     @Override
     public void configureValidatingRepositoryEventListener(ValidatingRepositoryEventListener v) {
         v.addValidator("beforeCreate", userValidator);
-        v.addValidator("beforeSave", userValidator);
 
         v.addValidator("beforeCreate", roleValidator);
         v.addValidator("beforeSave", roleValidator);
