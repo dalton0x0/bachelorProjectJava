@@ -1,8 +1,6 @@
 package com.example.bachelorprojectjava.validators;
 
 import com.example.bachelorprojectjava.models.User;
-import com.example.bachelorprojectjava.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -11,9 +9,6 @@ import java.util.regex.Pattern;
 
 @Component
 public class UserValidator implements Validator {
-
-    @Autowired
-    private UserRepository userRepository;
 
     static String regex = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -48,13 +43,6 @@ public class UserValidator implements Validator {
         }
         if (user.getPassword().length() < 8) {
             errors.rejectValue("password", "Password.required", "Password must be at least 8 characters long");
-        }
-
-        if (userRepository.existsByEmail(user.getEmail())) {
-            errors.rejectValue("email", "email.exists", "Email already exists");
-        }
-        if (userRepository.existsByUsername(user.getUsername())) {
-            errors.rejectValue("username", "username.exists", "Username already exists");
         }
     }
 }
