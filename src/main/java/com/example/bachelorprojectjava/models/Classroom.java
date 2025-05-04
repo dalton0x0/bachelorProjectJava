@@ -29,4 +29,8 @@ public class Classroom {
     @ManyToMany(mappedBy = "taughtClassrooms", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<User> teachers = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "classrooms", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Evaluation> evaluations = new ArrayList<>();
 }

@@ -1,15 +1,15 @@
 package com.example.bachelorprojectjava.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,4 +25,17 @@ public class Evaluation {
     private double minValue;
     private double maxValue;
     private LocalDateTime date;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "created_by", nullable = false)
+    private User createdBy;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "classroom_evaluation",
+            joinColumns = @JoinColumn(name = "evaluation_id"),
+            inverseJoinColumns = @JoinColumn(name = "classroom_id")
+    )
+    @JsonIgnore
+    private List<Classroom> classrooms = new ArrayList<>();
 }
