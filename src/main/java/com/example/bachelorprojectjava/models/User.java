@@ -1,11 +1,15 @@
 package com.example.bachelorprojectjava.models;
 
 import com.example.bachelorprojectjava.enums.RoleType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +31,17 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "classroom_teacher",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "classroom_id"))
+    @JsonIgnore
+    private List<Classroom> taughtClassrooms = new ArrayList<>();
 
     public boolean isTeacher() {
         return role.getRoleType() == RoleType.TEACHER;

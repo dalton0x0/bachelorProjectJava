@@ -1,13 +1,14 @@
 package com.example.bachelorprojectjava.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,12 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy = "classroom", fetch = FetchType.EAGER)
+    @JsonIgnore
+    List<User> students = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "taughtClassrooms", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<User> teachers = new ArrayList<>();
 }
