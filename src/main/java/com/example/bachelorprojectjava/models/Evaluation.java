@@ -38,4 +38,8 @@ public class Evaluation {
     )
     @JsonIgnore
     private List<Classroom> classrooms = new ArrayList<>();
+
+    @OneToMany(mappedBy = "evaluation", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
+    private List<Note> notes = new ArrayList<>();
 }
